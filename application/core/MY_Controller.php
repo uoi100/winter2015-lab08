@@ -33,7 +33,11 @@ class Application extends CI_Controller {
 
         // get role and name from session
         $userRole = $this->session->userdata('userRole');
+
+        
         $userName = $this->session->userdata('userName');
+        
+        if(empty($userName))
         // make array, with menu choice for alpha
         $config['menu_choices'] = array();
         // if not logged in, add menu choice to login
@@ -48,6 +52,7 @@ class Application extends CI_Controller {
         if($userRole == ROLE_USER){
             $config['menu_choices'] = array(
                 'menudata' => array(
+                    array('name' => $userName,'link' => "/"),
                     array('name' => "Beta", 'link' => '/beta'),
                     array('name' => "Logout", 'link' => '/auth/logout')
                 )
@@ -57,6 +62,7 @@ class Application extends CI_Controller {
         if($userRole == ROLE_ADMIN){
             $config['menu_choices'] = array(
                 'menudata' => array(
+                    array('name' => $userName,'link' => "/"),
                     array('name' => "Alpha", 'link' => '/alpha'),
                     array('name' => "Beta", 'link' => '/beta'),
                     array('name' => "Gamma", 'link' => '/gamma'),
